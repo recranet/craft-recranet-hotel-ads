@@ -1,0 +1,49 @@
+{% import '_includes/forms.twig' as forms %}
+
+{% if overrides is not empty %}
+    <p class="warning has-icon">
+        <span class="icon" aria-hidden="true"></span>
+        {{ 'Set in config/_recranet-hotel-ads.php, which overrides this page: {settings}.'|t('app', { settings: overrides|join(', ') }) }}
+    </p>
+{% endif %}
+
+{{ forms.autosuggestField({
+    label: 'Recranet organization ID',
+    instructions: 'Used for every site that does not set its own. Accepts an environment variable.',
+    id: 'organizationId',
+    name: 'organizationId',
+    value: settings.organizationId,
+    suggestEnvVars: true,
+    errors: settings.getErrors('organizationId'),
+}) }}
+
+<hr>
+
+<h2>Sites</h2>
+<p>The Hotel Center partner prefix makes the hotel ID <code>&lt;prefix&gt;_&lt;accommodation ID&gt;</code>. A site without a prefix gets no output.</p>
+
+{% for site in sites %}
+    <h3>{{ site.name }} <code>{{ site.handle }}</code></h3>
+    <div class="flex flex-nowrap">
+        {{ forms.autosuggestField({
+            label: 'Hotel Center prefix',
+            id: 'sites-' ~ site.handle ~ '-hotelIdPrefix',
+            name: 'sites[' ~ site.handle ~ '][hotelIdPrefix]',
+            value: settings.sites[site.handle].hotelIdPrefix ?? '',
+            suggestEnvVars: true,
+            placeholder: 'e.g. 4298',
+        }) }}
+        {{ forms.autosuggestField({
+            label: 'Organization ID',
+            instructions: 'Only when it differs from the one above.',
+            id: 'sites-' ~ site.handle ~ '-organizationId',
+            name: 'sites[' ~ site.handle ~ '][organizationId]',
+            value: settings.sites[site.handle].organizationId ?? '',
+            suggestEnvVars: true,
+        }) }}
+    </div>
+{% endfor %}
+
+{% if settings.getErrors('sites') %}
+    {{ forms.errorList(settings.getErrors('sites')) }}
+{% endif %}

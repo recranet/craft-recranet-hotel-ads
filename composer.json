@@ -1,0 +1,43 @@
+{
+  "name": "recranet/craft-recranet-hotel-ads",
+  "description": "Server-rendered Google Hotel Ads price as JSON-LD on Recranet accommodation pages",
+  "type": "craft-plugin",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.2",
+    "craftcms/cms": "^5.0.0",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main",
+    "phpstan/phpstan": "^2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "recranet\\craftrecranethotelads\\": "src/"
+    }
+  },
+  "extra": {
+    "handle": "_recranet-hotel-ads",
+    "name": "Recranet Hotel Ads",
+    "developer": "Recranet",
+    "documentationUrl": "https://github.com/recranet/craft-recranet-hotel-ads",
+    "class": "recranet\\craftrecranethotelads\\HotelAds"
+  },
+  "scripts": {
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --ansi --fix",
+    "phpstan": "phpstan --memory-limit=1G"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "8.2"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  }
+}

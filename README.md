@@ -1,6 +1,6 @@
 # Recranet Hotel Ads
 
-Craft CMS 5 plugin that puts the price of a Google Hotel Ads landing URL in the page's HTML as
+Craft CMS 4 and 5 plugin that puts the price of a Google Hotel Ads landing URL in the page's HTML as
 JSON-LD, so Google's price verifier doesn't have to wait for Recranet Elements to load it with
 JavaScript.
 
@@ -17,7 +17,7 @@ Recranet API and asks the pricing API the same question Elements asks.
 
 ## Requirements
 
-- Craft CMS 5, PHP 8.2+
+- Craft CMS 4 or 5, PHP 8.1+
 - A Hotel Center partner prefix for the site (e.g. `4298` for Beaujean)
 
 ## Install

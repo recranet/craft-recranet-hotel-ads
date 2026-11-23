@@ -34,7 +34,12 @@ class Settings extends Model
     {
         $value = trim((string) App::parseEnv($this->sites[$site->handle]['hotelIdPrefix'] ?? ''));
 
-        return $value !== '' ? $value : null;
+        // Craft 4 leaves the name of an environment variable that is not set in place.
+        if ($value === '' || str_starts_with($value, '$')) {
+            return null;
+        }
+
+        return $value;
     }
 
     protected function defineRules(): array
